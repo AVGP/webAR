@@ -2,7 +2,7 @@ var WIDTH = document.body.clientWidth, HEIGHT = document.body.clientHeight;
 
 var scene = new THREE.Scene(),
     camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000),
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({ alpha: true });
 
 document.body.appendChild(renderer.domElement);
 renderer.setSize(WIDTH, HEIGHT);
@@ -35,7 +35,18 @@ function deg2rad(angle) {
   return (angle / 180.0) * Math.PI;
 }
 
+var canvas = document.getElementById("camera"),
+    video  = document.querySelector("video");
+
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+
+var ctx = canvas.getContext("2d");
+
 function draw() {
+  ctx.fillStyle = "#ff00ff";
+  ctx.fillRect(0,0,WIDTH,HEIGHT);
+  ctx.drawImage(video, 0, 0, WIDTH, HEIGHT);
   renderer.render(scene, camera);
   requestAnimationFrame(draw);
 }
