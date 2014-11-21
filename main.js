@@ -28,7 +28,25 @@ scene.add(south);
 scene.add(west);
 
 window.addEventListener("deviceorientation", function(e) {
-  camera.rotation.set(0, deg2rad(e.alpha), 0);
+  var heading = e.alpha,
+      pitch   = e.gamma;
+
+  // Correcting the sensors being "clever"
+  if(Math.abs(e.beta) > 45) {
+    heading += 90;
+  } else {
+    heading -= 90;
+  }
+
+  if(pitch < 0) {
+    pitch = -90 - pitch;
+  } else {
+    pitch =  90 - pitch;
+  }
+
+  if(heading < 0) heading = 360 + heading;
+
+  camera.rotation.set(deg2rad(pitch), deg2rad(heading), 0);
 });
 
 function deg2rad(angle) {
@@ -66,17 +84,20 @@ navigator.getMedia = ( navigator.getUserMedia ||
 MediaStreamTrack.getSources(function(mediaSources) {
   mediaSources.forEach(function(mediaSource){
     if (mediaSource.kind === 'video' && mediaSource.facing == "environment") {
-            showWebcamVideo(mediaSource.id);
+      console.log("media source found...")
+      showWebcamVideo(mediaSource.id);
     }
   });
 });
 
 function showWebcamVideo(sourceId) {
+  console.log("About to start video...");
   navigator.getMedia({
     video: {
       optional: [{sourceId: sourceId}]
     }
   }, function onSuccess(stream) {
+    console.log("Starting webcam video");
     var video = document.querySelector('video');
     video.src = window.URL.createObjectURL(stream);
   }, function onError(err) {
