@@ -46,7 +46,7 @@ window.addEventListener("deviceorientation", function(e) {
 
   if(heading < 0) heading = 360 + heading;
 
-  camera.rotation.set(deg2rad(pitch), deg2rad(heading), 0);
+  camera.rotation.set(0, deg2rad(heading), 0);
 });
 
 function deg2rad(angle) {
