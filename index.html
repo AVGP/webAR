@@ -29,10 +29,28 @@
     video {
       display: none;
     }
+
+    #instructions {
+      width: 50%;
+      margin-left: 25%;
+      margin-top: 1em;
+      border: 1px solid gray;
+      border-radius: 0.5em;
+      padding: 1em;
+      text-align: center;
+    }
+
+    .hidden { display: none; }
   </style>
 </head>
 <body>
-  <canvas id="camera" width="300" height="300"></canvas>
+  <div id="instructions">
+    <h1>Instructions</h1>
+    <p>Please hold your phone in landscape mode with the top of the phone in your left hand.</p>
+    <p>Allow fullscreen and access to the webcam for the demo to work properly.</p>
+    <button>Click me to start!</button>
+  </div>
+  <canvas class="hidden" id="camera" width="300" height="300"></canvas>
   <video preload="metadata" autoplay="yes"></video>
   <script src="main.js"></script>
 </body>
