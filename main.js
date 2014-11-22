@@ -13,7 +13,7 @@ navigator.getMedia = ( navigator.getUserMedia ||
 var scene = new THREE.Scene(),
     camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000),
     renderer = new THREE.WebGLRenderer({ alpha: true }),
-    light, geometry, north, south, east, west, ctx,
+    light, geometry, north, south, east, west, ctx, rotWorldMatrix,
     canvas = document.getElementById("camera"),
     video  = document.querySelector("video"),
     button = document.querySelector("button");
@@ -76,6 +76,8 @@ function updateOrientation(e) {
 }
 
 // Initialisiation and run!
+
+camera.eulerOrder = 'YXZ';
 
 light = new THREE.PointLight(0xffffff, 1, 100);
 scene.add(light);
