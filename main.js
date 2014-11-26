@@ -10,6 +10,10 @@ navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
 
+if(!navigator.getMedia) {
+  alert("Oh noes! Your browser does not support webcam video :(");
+}
+
 var scene = new THREE.Scene(),
     camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000),
     renderer = new THREE.WebGLRenderer({ alpha: true }),
@@ -77,7 +81,7 @@ function updateOrientation(e) {
 
 // Initialisiation and run!
 
-camera.eulerOrder = 'YXZ';
+camera.eulerOrder = 'YXZ'; // We want to rotate around the Y axis first or our perspective is screwed up
 
 light = new THREE.PointLight(0xffffff, 1, 100);
 scene.add(light);
