@@ -10,6 +10,12 @@ navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
 
+window.addEventListener("compassneedscalibration", function(event) {
+  self.supported = true;
+  alert('Your compass needs calibrating!');
+  event.preventDefault();
+}, true);
+
 if(!navigator.getMedia) {
   alert("Oh noes! Your browser does not support webcam video :(");
 }
@@ -77,6 +83,7 @@ function updateOrientation(e) {
   if(heading < 0) heading = 360 + heading;
 
   camera.rotation.set(deg2rad(pitch), deg2rad(heading), 0);
+  event.preventDefault();
 }
 
 // Initialisiation and run!
