@@ -23,7 +23,7 @@ if(!navigator.getMedia) {
 var scene = new THREE.Scene(),
     camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000),
     renderer = new THREE.WebGLRenderer({ alpha: true }),
-    light, geometry, north, south, east, west, ctx, rotWorldMatrix,
+    light, geometry, north, south, east, west, ctx,
     canvas = document.getElementById("camera"),
     video  = document.querySelector("video"),
     button = document.querySelector("button");
